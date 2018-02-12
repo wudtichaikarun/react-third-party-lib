@@ -15,6 +15,16 @@ class App extends Component {
 
   componentDidMount() {
     this.addItems()
+
+    window.onscroll = () => {
+      const d = document.documentElement
+      const offset = window.scrollY + window.innerHeight
+      const height = d.offsetHeight
+
+      if (offset === height) {
+        this.addItems()
+      }
+    }
   }
 
   addItems() {
