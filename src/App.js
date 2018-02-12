@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import uuidv4 from 'uuid-v4'
 import InfiniteScroll from 'react-infinite-scroller'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import style from './App.css'
 
 const Box = ({ item }) => (
   <div className='card m-2'>

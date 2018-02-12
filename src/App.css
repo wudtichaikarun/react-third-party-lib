@@ -1,0 +1,10 @@
+
+/* Note: if use webpack.config.js 
+:global(.card) {
+  .......
+}
+*/
+.card {
+  border-radius: 1rem;
+  color: orangered;
+}
