@@ -1,12 +1,22 @@
 import React, { Component } from 'react'
 import uuidv4 from 'uuid-v4'
-import InfiniteScroll from 'react-infinite-scroller'
+// Bootstrap
+import $ from 'jquery'
+import Popper  from 'popper.js'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import style from './App.css'
+import 'bootstrap/dist/js/bootstrap.min.js'
+
+import InfiniteScroll from 'react-infinite-scroller'
+import styles from './App.css'
 
 const Box = ({ item }) => (
   <div className='card m-2'>
-    <div className='m-2' >{item}gg</div>
+    <p
+      data-toggle='tooltip'
+      data-placement='top'
+      title={item} >
+        {item}
+    </p>
   </div>
 )
 
@@ -17,6 +27,10 @@ class App extends Component {
 
   componentDidMount() {
     this.addItems()
+
+    $(function () {
+      $('[data-toggle="tooltip"]').tooltip()
+    })
   }
 
   addItems = () => {
