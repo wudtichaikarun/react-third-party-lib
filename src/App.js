@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
-import './App.css';
+import React, { Component } from 'react'
+import './App.css'
 import uuidv4 from 'uuid-v4'
+import $ from 'jquery'
 
 const Box = ({ item }) => (
   <div className='card m-2'>
@@ -16,15 +17,11 @@ class App extends Component {
   componentDidMount() {
     this.addItems()
 
-    window.onscroll = () => {
-      const d = document.documentElement
-      const offset = window.scrollY + window.innerHeight
-      const height = d.offsetHeight
-
-      if (offset === height) {
+    $(window).scroll(() => {
+      if($(window).scrollTop() + $(window).height() == $(document).height()){
         this.addItems()
       }
-    }
+    })
   }
 
   addItems() {
