@@ -1,24 +1,40 @@
 import React, { Component } from 'react'
 import uuidv4 from 'uuid-v4'
-// Bootstrap
-import $ from 'jquery'
-import Popper  from 'popper.js'
-import 'bootstrap/dist/css/bootstrap.min.css'
-import 'bootstrap/dist/js/bootstrap.min.js'
-
 import InfiniteScroll from 'react-infinite-scroller'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import { Card, CardColumns, Tooltip } from 'reactstrap'
 import styles from './App.css'
 
-const Box = ({ item }) => (
-  <div className='card m-2'>
-    <p
-      data-toggle='tooltip'
-      data-placement='top'
-      title={item} >
-        {item}
-    </p>
-  </div>
-)
+class Box extends Component {
+  state = {
+    tooltipOpen: false
+  }
+
+  toggle = () => {
+    this.setState(prev => ({
+      tooltipOpen: !prev.tooltipOpen
+    }))
+  }
+
+  render() {
+    const item = this.props.item
+
+    return (
+      <Card className='m-2'>
+        <div className='m-2'>
+          <p id={'targetId'+item}>{item}</p>
+          <Tooltip
+            placement='top'
+            isOpen={this.state.tooltipOpen} 
+            target={'targetId'+item}
+            toggle={this.toggle}>
+              {item}
+          </Tooltip>
+        </div>
+      </Card>
+    )
+  }
+}
 
 class App extends Component {
   state = {
@@ -27,10 +43,6 @@ class App extends Component {
 
   componentDidMount() {
     this.addItems()
-
-    $(function () {
-      $('[data-toggle="tooltip"]').tooltip()
-    })
   }
 
   addItems = () => {
@@ -50,13 +62,13 @@ class App extends Component {
           pageStart={0}
           loadMore={this.addItems}
           hasMore={true} >
-          <div className="card-columns m2">
+          <CardColumns className="m-2">
             {
               this.state.items.map(
                 item => <Box key={item} item={item} />
               )
             }
-        </div>
+          </CardColumns>
       </InfiniteScroll>
     )
   }
